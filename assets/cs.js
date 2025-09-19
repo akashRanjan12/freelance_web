@@ -17,30 +17,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const targetId = this.getAttribute("href");
-    if (targetId === "#") return;
-
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 80,
-        behavior: "smooth",
-      });
-
-      // Close mobile menu if open
-      if (hamburger.classList.contains("active")) {
-        hamburger.classList.remove("active");
-        navLinks.classList.remove("active");
-      }
-    }
-  });
-});
-
 // Portfolio filtering
 const filterButtons = document.querySelectorAll(".filter-btn");
 const portfolioItems = document.querySelectorAll(".portfolio-item");
@@ -70,56 +46,11 @@ filterButtons.forEach((button) => {
   });
 });
 
-// Testimonial slider
-const testimonialDots = document.querySelectorAll(".testimonial-dot");
-const testimonials = document.querySelectorAll(".testimonial");
-
-testimonialDots.forEach((dot) => {
-  dot.addEventListener("click", () => {
-    const index = dot.getAttribute("data-index");
-
-    // Remove active class from all testimonials and dots
-    testimonials.forEach((testimonial) =>
-      testimonial.classList.remove("active")
-    );
-    testimonialDots.forEach((d) => d.classList.remove("active"));
-
-    // Add active class to selected testimonial and dot
-    testimonials[index].classList.add("active");
-    dot.classList.add("active");
-  });
-});
-
-// Animate skill bars when they come into view
-const skillLevels = document.querySelectorAll(".skill-level");
-
-function animateSkills() {
-  skillLevels.forEach((skill) => {
-    const level = skill.getAttribute("data-level");
-    skill.style.width = level;
-  });
-}
-
-// Run animation when skills section is in viewport
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateSkills();
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
-
-observer.observe(document.querySelector(".skills"));
-
 // Initialize animations
 document.addEventListener("DOMContentLoaded", () => {
   // Animate elements on scroll
   const animateOnScroll = document.querySelectorAll(
-    ".service-card, .portfolio-item, .contact-item"
+    ".spec-card, .tool-card, .portfolio-item, .cert-card"
   );
 
   const scrollObserver = new IntersectionObserver(
